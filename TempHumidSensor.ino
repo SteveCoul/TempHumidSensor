@@ -1,11 +1,21 @@
 
 #include <Wire.h>
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h>
+#include <ESP8266WiFiMulti.h> 
+#include <ESP8266mDNS.h>
+#include <ESP8266WebServer.h> 
 
 #define I2C_ADDRESS	0x44
+
+#include "secret.h"
 
 /* ********************************************************** *
  *
  * ********************************************************** */
+
+ESP8266WiFiMulti wifi;
+ESP8266WebServer server(80);
 
 float currentTemperature;
 float currentHumidity;
@@ -84,6 +94,14 @@ void sensorUpdate() {
  *
  * ********************************************************** */
 
+void handleNotFound(){
+	server.send(404, "text/plain", "404: Not found");
+}
+ 
+/* ********************************************************** *
+ *
+ * ********************************************************** */
+
 void setup() {
 	Serial.begin( 115200 );
 	Serial.println("Startup");
@@ -91,12 +109,40 @@ void setup() {
 	Wire.begin();
 
 	sensorReset();
+
+	wifi.addAP( SECRET_SSID, SECRET_PASSWORD );
+
+	Serial.println( SECRET_SSID );
+	Serial.println( SECRET_PASSWORD );
+
+	while (wifi.run() != WL_CONNECTED) {
+    	delay(250);
+    	Serial.print('.');
+	}
+  	Serial.print("Connected to ");
+  	Serial.println(WiFi.SSID());
+  	Serial.print("IP address:\t");
+  	Serial.println(WiFi.localIP());
+
+  	if (MDNS.begin("esp8266")) { 
+    	Serial.println("mDNS responder started");
+	} else {
+    	Serial.println("Error setting up MDNS responder!");
+	}
+
+	server.onNotFound(handleNotFound); 
+	server.begin();
+
+	MDNS.addService("_http", "_tcp", 80);
 }
 
 void loop() {
 	static int counter = 0;
 	delay(100);
 	counter++;
+
+	MDNS.update();
+	server.handleClient();
 
 	if ( counter == 20 ) {
 		counter = 0;
