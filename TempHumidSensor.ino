@@ -121,16 +121,15 @@ void setup() {
   	Serial.print("IP address:\t");
   	Serial.println(WiFi.localIP());
 
-  	if (MDNS.begin("esp8266.local")) { 
+  	if (MDNS.begin("esp8266", WiFi.localIP())) { 
     	Serial.println("mDNS responder started");
+		MDNS.addService("http", "tcp", 80);
 	} else {
     	Serial.println("Error setting up MDNS responder!");
 	}
 
 	server.onNotFound(handleNotFound); 
 	server.begin();
-
-	MDNS.addService("_http", "_tcp", 80);
 }
 
 void loop() {
