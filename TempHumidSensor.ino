@@ -112,9 +112,6 @@ void setup() {
 
 	wifi.addAP( SECRET_SSID, SECRET_PASSWORD );
 
-	Serial.println( SECRET_SSID );
-	Serial.println( SECRET_PASSWORD );
-
 	while (wifi.run() != WL_CONNECTED) {
     	delay(250);
     	Serial.print('.');
@@ -124,7 +121,7 @@ void setup() {
   	Serial.print("IP address:\t");
   	Serial.println(WiFi.localIP());
 
-  	if (MDNS.begin("esp8266")) { 
+  	if (MDNS.begin("esp8266.local")) { 
     	Serial.println("mDNS responder started");
 	} else {
     	Serial.println("Error setting up MDNS responder!");
