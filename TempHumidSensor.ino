@@ -1,4 +1,5 @@
 
+#include <EEPROM.h>
 #include <Wire.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -16,9 +17,30 @@
 
 ESP8266WiFiMulti wifi;
 ESP8266WebServer server(80);
+WiFiServer dataserver(32768);
 
+char location[64];
 float currentTemperature;
 float currentHumidity;
+
+/* ********************************************************** *
+ *
+ * ********************************************************** */
+
+void readLocation() {
+	for ( int i = 0; i < 64; i++ )
+		location[i] = (char)EEPROM.read( i );
+}
+
+void setLocation( const char* name ) {
+	strcpy( location, name );
+	for ( int i = 0; i < 64; i++ )
+		EEPROM.write( i, location[i] );
+	if ( ! EEPROM.commit()  ) {
+		Serial.println("Failed to commit eeprom");
+	}
+	MDNS.addServiceTxt("temphumidsensor", "tcp", "location", location );
+}
 
 /* ********************************************************** *
  *
@@ -94,17 +116,68 @@ void sensorUpdate() {
  *
  * ********************************************************** */
 
+char tmp[1024];
+
 void handleNotFound(){
 	server.send(404, "text/plain", "404: Not found");
 }
+
+void handleRoot() {
+	char* p = tmp;
+	p+=sprintf(p,"<HTML>");
+	p+=sprintf(p,"<BODY>");
+	p+=sprintf(p,"<P>One of my temperature sensors</P>");
+	p+=sprintf(p,"<P>Called %s</P>",  WiFi.softAPSSID().c_str() );
+	p+=sprintf(p,"<P>Location %s</P>", location );
+	p+=sprintf(p,"<P>Temperature %f</P>", currentTemperature );
+	p+=sprintf(p,"<P>Humidity %f</P>", currentHumidity );
+	p+=sprintf(p,"</BODY>");
+	p+=sprintf(p,"</HTML>");
+	server.send(200,"text/html", tmp );
+}
  
+void handleData() {
+	char* p = tmp;
+	p+=sprintf( p, "{" );
+	p+=sprintf( p, "\"data\": {");
+	p+=sprintf( p, "\"name\": \"%s\",", WiFi.softAPSSID().c_str() );
+	p+=sprintf( p, "\"location\": \"%s\",", location );
+	p+=sprintf( p, "\"temperature\": \"%f\",", currentTemperature );
+	p+=sprintf( p, "\"humidity\": \"%f\"", currentHumidity );
+	p+=sprintf( p, "}");
+	p+=sprintf( p, "}");
+	server.send(200,"text/json", tmp );
+}
+
+void handleSetLocation() {
+
+	const char* arg = server.arg("arg").c_str();
+	setLocation( arg );
+
+	char* p = tmp;
+	p+=sprintf(p,"<HTML>");
+	p+=sprintf(p,"<BODY>");
+	p+=sprintf(p,"<P>Location now %s</P>", location );
+	p+=sprintf(p,"</BODY>");
+	p+=sprintf(p,"</HTML>");
+	server.send(200,"text/html", tmp );
+}
+
 /* ********************************************************** *
  *
  * ********************************************************** */
 
 void setup() {
+
+	EEPROM.begin( 512 );
+
+	readLocation();
+
 	Serial.begin( 115200 );
 	Serial.println("Startup");
+
+	Serial.print("ConfigAP SSID: ");
+	Serial.println( WiFi.softAPSSID() );
 
 	Wire.begin();
 
@@ -121,15 +194,21 @@ void setup() {
   	Serial.print("IP address:\t");
   	Serial.println(WiFi.localIP());
 
-  	if (MDNS.begin("esp8266", WiFi.localIP())) { 
+  	if (MDNS.begin(  WiFi.softAPSSID().c_str(), WiFi.localIP())) { 
     	Serial.println("mDNS responder started");
 		MDNS.addService("http", "tcp", 80);
+		MDNS.addService("temphumidsensor", "tcp", 32768);
+		MDNS.addServiceTxt("temphumidsensor", "tcp", "location", location );
 	} else {
     	Serial.println("Error setting up MDNS responder!");
 	}
 
+	server.on("/", handleRoot);
+	server.on("/data.json", handleData);
+	server.on("/setLocation", handleSetLocation);
 	server.onNotFound(handleNotFound); 
 	server.begin();
+	dataserver.begin();
 }
 
 void loop() {
@@ -139,6 +218,20 @@ void loop() {
 
 	MDNS.update();
 	server.handleClient();
+
+	WiFiClient c = dataserver.available();
+	if ( c ) {
+		c.println("{");
+		c.println("  \"data\": {");
+		c.print("    \"name\": \""); c.print( WiFi.softAPSSID() ); c.println("\",");
+		c.print("    \"location\": \""); c.print( location ); c.println("\",");
+		c.print("    \"temperature\": \""); c.print( currentTemperature ); c.println("\",");
+		c.print("    \"humidity\": \""); c.print( currentHumidity ); c.println("\"");
+		c.println("  }");
+		c.println("}");
+		c.flush();
+		c.stop();
+	}
 
 	if ( counter == 20 ) {
 		counter = 0;
