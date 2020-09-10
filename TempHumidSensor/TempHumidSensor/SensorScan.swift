@@ -8,10 +8,15 @@
 
 import Foundation
 
+protocol SensorScanFound {
+    func foundSensor( name: String, address: String )
+}
+
 class SensorScan : NSObject, NetServiceBrowserDelegate, NetServiceDelegate {
     
     var browser = NetServiceBrowser()
     var service_discovery = [NetService]()
+    var callback : SensorScanFound? = nil
     
     func resolveIPv4(addresses: [Data]) -> String? {
         var result: String?
@@ -43,18 +48,20 @@ class SensorScan : NSObject, NetServiceBrowserDelegate, NetServiceDelegate {
     func netServiceBrowser(_ browser: NetServiceBrowser, didFind svc: NetService, moreComing: Bool) {
         svc.delegate = self
         svc.resolve(withTimeout: 5)
-        print( svc, moreComing )
         service_discovery.append(svc)
     }
     
     func netServiceDidResolveAddress(_ sender: NetService) {
         if let serviceIp = resolveIPv4(addresses: sender.addresses!) {
-            var str = String("http://" + serviceIp + ":" + String( sender.port ) )
+            let str = String("http://" + serviceIp + ":" + String( sender.port ) )
+            callback?.foundSensor(name: sender.name, address: str)
         }
     }
 
-    func run() {
+    func run( _ cb: SensorScanFound? = nil ) {
+        callback = cb
         browser = NetServiceBrowser()
+        service_discovery.removeAll()
         browser.delegate = self
         browser.searchForServices(ofType: "_temphumidsensor._tcp.", inDomain: "")
     }

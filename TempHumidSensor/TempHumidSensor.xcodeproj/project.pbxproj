@@ -7,29 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35816C8A2509718300F95510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35816C892509718300F95510 /* AppDelegate.swift */; };
-		35816C8C2509718300F95510 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35816C8B2509718300F95510 /* SceneDelegate.swift */; };
-		35816C8E2509718300F95510 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35816C8D2509718300F95510 /* ContentView.swift */; };
-		35816C902509718400F95510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35816C8F2509718400F95510 /* Assets.xcassets */; };
-		35816C932509718400F95510 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35816C922509718400F95510 /* Preview Assets.xcassets */; };
-		35816C962509718400F95510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35816C942509718400F95510 /* LaunchScreen.storyboard */; };
-		35816C9E2509723B00F95510 /* Sensors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35816C9D2509723B00F95510 /* Sensors.swift */; };
+		3574A92F250AB5BE00EE96B3 /* SensorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3574A92E250AB5BE00EE96B3 /* SensorList.swift */; };
+		3597C225250A6A2900B93D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597C224250A6A2900B93D2C /* AppDelegate.swift */; };
+		3597C227250A6A2900B93D2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597C226250A6A2900B93D2C /* SceneDelegate.swift */; };
+		3597C229250A6A2900B93D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597C228250A6A2900B93D2C /* ViewController.swift */; };
+		3597C22C250A6A2900B93D2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3597C22A250A6A2900B93D2C /* Main.storyboard */; };
+		3597C22E250A6A2B00B93D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3597C22D250A6A2B00B93D2C /* Assets.xcassets */; };
+		3597C231250A6A2B00B93D2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3597C22F250A6A2B00B93D2C /* LaunchScreen.storyboard */; };
+		3597C239250A6ACC00B93D2C /* SensorScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597C238250A6ACC00B93D2C /* SensorScan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35816C862509718300F95510 /* TempHumidSensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempHumidSensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		35816C892509718300F95510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		35816C8B2509718300F95510 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		35816C8D2509718300F95510 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		35816C8F2509718400F95510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		35816C922509718400F95510 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		35816C952509718400F95510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		35816C972509718400F95510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		35816C9D2509723B00F95510 /* Sensors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensors.swift; sourceTree = "<group>"; };
+		3574A92E250AB5BE00EE96B3 /* SensorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorList.swift; sourceTree = "<group>"; };
+		3597C221250A6A2900B93D2C /* TempHumidSensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempHumidSensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3597C224250A6A2900B93D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3597C226250A6A2900B93D2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3597C228250A6A2900B93D2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3597C22B250A6A2900B93D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3597C22D250A6A2B00B93D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3597C230250A6A2B00B93D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3597C232250A6A2B00B93D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3597C238250A6ACC00B93D2C /* SensorScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorScan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		35816C832509718300F95510 /* Frameworks */ = {
+		3597C21E250A6A2900B93D2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,55 +41,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		35816C7D2509718300F95510 = {
+		3597C218250A6A2900B93D2C = {
 			isa = PBXGroup;
 			children = (
-				35816C9D2509723B00F95510 /* Sensors.swift */,
-				35816C882509718300F95510 /* TempHumidSensor */,
-				35816C872509718300F95510 /* Products */,
+				3597C223250A6A2900B93D2C /* TempHumidSensor */,
+				3597C222250A6A2900B93D2C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		35816C872509718300F95510 /* Products */ = {
+		3597C222250A6A2900B93D2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				35816C862509718300F95510 /* TempHumidSensor.app */,
+				3597C221250A6A2900B93D2C /* TempHumidSensor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		35816C882509718300F95510 /* TempHumidSensor */ = {
+		3597C223250A6A2900B93D2C /* TempHumidSensor */ = {
 			isa = PBXGroup;
 			children = (
-				35816C892509718300F95510 /* AppDelegate.swift */,
-				35816C8B2509718300F95510 /* SceneDelegate.swift */,
-				35816C8D2509718300F95510 /* ContentView.swift */,
-				35816C8F2509718400F95510 /* Assets.xcassets */,
-				35816C942509718400F95510 /* LaunchScreen.storyboard */,
-				35816C972509718400F95510 /* Info.plist */,
-				35816C912509718400F95510 /* Preview Content */,
+				3597C224250A6A2900B93D2C /* AppDelegate.swift */,
+				3597C226250A6A2900B93D2C /* SceneDelegate.swift */,
+				3597C228250A6A2900B93D2C /* ViewController.swift */,
+				3597C22A250A6A2900B93D2C /* Main.storyboard */,
+				3597C22D250A6A2B00B93D2C /* Assets.xcassets */,
+				3597C22F250A6A2B00B93D2C /* LaunchScreen.storyboard */,
+				3597C232250A6A2B00B93D2C /* Info.plist */,
+				3597C238250A6ACC00B93D2C /* SensorScan.swift */,
+				3574A92E250AB5BE00EE96B3 /* SensorList.swift */,
 			);
 			path = TempHumidSensor;
-			sourceTree = "<group>";
-		};
-		35816C912509718400F95510 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				35816C922509718400F95510 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		35816C852509718300F95510 /* TempHumidSensor */ = {
+		3597C220250A6A2900B93D2C /* TempHumidSensor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35816C9A2509718400F95510 /* Build configuration list for PBXNativeTarget "TempHumidSensor" */;
+			buildConfigurationList = 3597C235250A6A2B00B93D2C /* Build configuration list for PBXNativeTarget "TempHumidSensor" */;
 			buildPhases = (
-				35816C822509718300F95510 /* Sources */,
-				35816C832509718300F95510 /* Frameworks */,
-				35816C842509718300F95510 /* Resources */,
+				3597C21D250A6A2900B93D2C /* Sources */,
+				3597C21E250A6A2900B93D2C /* Frameworks */,
+				3597C21F250A6A2900B93D2C /* Resources */,
 			);
 			buildRules = (
 			);
@@ -95,25 +90,25 @@
 			);
 			name = TempHumidSensor;
 			productName = TempHumidSensor;
-			productReference = 35816C862509718300F95510 /* TempHumidSensor.app */;
+			productReference = 3597C221250A6A2900B93D2C /* TempHumidSensor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		35816C7E2509718300F95510 /* Project object */ = {
+		3597C219250A6A2900B93D2C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "STEVEN COUL";
 				TargetAttributes = {
-					35816C852509718300F95510 = {
+					3597C220250A6A2900B93D2C = {
 						CreatedOnToolsVersion = 11.6;
 					};
 				};
 			};
-			buildConfigurationList = 35816C812509718300F95510 /* Build configuration list for PBXProject "TempHumidSensor" */;
+			buildConfigurationList = 3597C21C250A6A2900B93D2C /* Build configuration list for PBXProject "TempHumidSensor" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,48 +116,57 @@
 				en,
 				Base,
 			);
-			mainGroup = 35816C7D2509718300F95510;
-			productRefGroup = 35816C872509718300F95510 /* Products */;
+			mainGroup = 3597C218250A6A2900B93D2C;
+			productRefGroup = 3597C222250A6A2900B93D2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				35816C852509718300F95510 /* TempHumidSensor */,
+				3597C220250A6A2900B93D2C /* TempHumidSensor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		35816C842509718300F95510 /* Resources */ = {
+		3597C21F250A6A2900B93D2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35816C962509718400F95510 /* LaunchScreen.storyboard in Resources */,
-				35816C932509718400F95510 /* Preview Assets.xcassets in Resources */,
-				35816C902509718400F95510 /* Assets.xcassets in Resources */,
+				3597C231250A6A2B00B93D2C /* LaunchScreen.storyboard in Resources */,
+				3597C22E250A6A2B00B93D2C /* Assets.xcassets in Resources */,
+				3597C22C250A6A2900B93D2C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		35816C822509718300F95510 /* Sources */ = {
+		3597C21D250A6A2900B93D2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35816C8A2509718300F95510 /* AppDelegate.swift in Sources */,
-				35816C9E2509723B00F95510 /* Sensors.swift in Sources */,
-				35816C8C2509718300F95510 /* SceneDelegate.swift in Sources */,
-				35816C8E2509718300F95510 /* ContentView.swift in Sources */,
+				3597C229250A6A2900B93D2C /* ViewController.swift in Sources */,
+				3597C225250A6A2900B93D2C /* AppDelegate.swift in Sources */,
+				3597C239250A6ACC00B93D2C /* SensorScan.swift in Sources */,
+				3574A92F250AB5BE00EE96B3 /* SensorList.swift in Sources */,
+				3597C227250A6A2900B93D2C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		35816C942509718400F95510 /* LaunchScreen.storyboard */ = {
+		3597C22A250A6A2900B93D2C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				35816C952509718400F95510 /* Base */,
+				3597C22B250A6A2900B93D2C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3597C22F250A6A2B00B93D2C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3597C230250A6A2B00B93D2C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -170,7 +174,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		35816C982509718400F95510 /* Debug */ = {
+		3597C233250A6A2B00B93D2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -230,7 +234,7 @@
 			};
 			name = Debug;
 		};
-		35816C992509718400F95510 /* Release */ = {
+		3597C234250A6A2B00B93D2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -284,14 +288,12 @@
 			};
 			name = Release;
 		};
-		35816C9B2509718400F95510 /* Debug */ = {
+		3597C236250A6A2B00B93D2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TempHumidSensor/Preview Content\"";
 				DEVELOPMENT_TEAM = VQE57WJ2DK;
-				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TempHumidSensor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -304,14 +306,12 @@
 			};
 			name = Debug;
 		};
-		35816C9C2509718400F95510 /* Release */ = {
+		3597C237250A6A2B00B93D2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TempHumidSensor/Preview Content\"";
 				DEVELOPMENT_TEAM = VQE57WJ2DK;
-				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TempHumidSensor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,25 +327,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35816C812509718300F95510 /* Build configuration list for PBXProject "TempHumidSensor" */ = {
+		3597C21C250A6A2900B93D2C /* Build configuration list for PBXProject "TempHumidSensor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				35816C982509718400F95510 /* Debug */,
-				35816C992509718400F95510 /* Release */,
+				3597C233250A6A2B00B93D2C /* Debug */,
+				3597C234250A6A2B00B93D2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		35816C9A2509718400F95510 /* Build configuration list for PBXNativeTarget "TempHumidSensor" */ = {
+		3597C235250A6A2B00B93D2C /* Build configuration list for PBXNativeTarget "TempHumidSensor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				35816C9B2509718400F95510 /* Debug */,
-				35816C9C2509718400F95510 /* Release */,
+				3597C236250A6A2B00B93D2C /* Debug */,
+				3597C237250A6A2B00B93D2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 35816C7E2509718300F95510 /* Project object */;
+	rootObject = 3597C219250A6A2900B93D2C /* Project object */;
 }
