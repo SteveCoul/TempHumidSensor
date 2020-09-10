@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  TempHumidSensor
 //
-//  Created by STEVEN COUL on 9/9/20.
+//  Created by STEVEN COUL on 9/10/20.
 //  Copyright © 2020 STEVEN COUL. All rights reserved.
 //
 
@@ -12,11 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        Sensors.start()
-
         return true
     }
 
