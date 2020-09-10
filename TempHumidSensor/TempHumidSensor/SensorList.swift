@@ -17,17 +17,50 @@ class Sensor {
     var last_seen = 0.0
     var name = ""
     var address = ""
+    var json = ""
+    var humidity = 0.0
+    var temperature = 0.0
+    
+    func string() -> String {
+        return name + " - " + String( temperature ) + " degF, " + String( humidity ) + "% Rh"
+    }
     
     init( name: String, address: String ) {
         self.name = name;
         self.address = address;
         self.last_seen = now()
+        update()
+    }
+    
+    func update() {
+        do {
+            let data = try Data( contentsOf: URL( string: address )! )
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments )
+            if let dictionary = json as? [String: Any]  {
+                if let vars = dictionary["data"] as? [String: String ] {
+                    let h = vars["humidity"]
+                    let t = vars["temperature"]
+                    humidity = Double( h! )!
+                    temperature = Double( t! )!
+                    
+                    print( string() )
+                }
+            }
+        } catch { }
     }
 }
 
 class SensorList {
  
     var list = [Sensor]()
+    
+    func string() -> String {
+        var s = NSDate().description + "\n"
+        list.forEach {
+            s = s + $0.string() + "\n"
+        }
+        return s
+    }
     
     func find( name: String, address: String ) -> Sensor? {
         var rc : Sensor? = nil
@@ -47,6 +80,7 @@ class SensorList {
         } else {
             print("Keep alive", name, "at", address )
             s!.last_seen = now()
+            s!.update()
         }
         
         list.sort { $0.name < $1.name }

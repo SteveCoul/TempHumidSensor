@@ -21,11 +21,19 @@ class ViewController: UIViewController, SensorScanFound {
     func update() -> Void {
         list.expire(20.0)
         scanner.run(self)
+        
+        let v = self.view as! UITextView
+        
+        v.text = "\n\nSensors Found\n\n" + list.string()
+        
+        
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: { self.update() })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view = UITextView()
         update();
     }
 
