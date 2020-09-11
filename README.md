@@ -1,7 +1,7 @@
 # TempHumidSensor
 Sensirion SHT31-DIS-B and Wemos Mini D1 Humitidy and Temperature sensor on local networkA
 
-
+``
 
 						TX	RX	D1	D2	D3	D4	G	5V
 								|	|			|
@@ -31,3 +31,6 @@ GND	--------------------------------------------|	|
 x = cut vero-track
 - = wire
 + = solder
+
+``
+
