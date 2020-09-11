@@ -6,6 +6,7 @@
 #include <ESP8266WiFiMulti.h> 
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h> 
+#include <ArduinoOTA.h>
 
 #define I2C_ADDRESS	0x44
 
@@ -194,6 +195,8 @@ void setup() {
   	Serial.print("IP address:\t");
   	Serial.println(WiFi.localIP());
 
+	ArduinoOTA.setPassword( SECRET_PASSWORD );
+
   	if (MDNS.begin(  WiFi.softAPSSID().c_str(), WiFi.localIP())) { 
     	Serial.println("mDNS responder started");
 		MDNS.addService("http", "tcp", 80);
@@ -203,11 +206,17 @@ void setup() {
     	Serial.println("Error setting up MDNS responder!");
 	}
 
+	Serial.println("OTA");
+	ArduinoOTA.begin();
+
+	Serial.println("HTTP");
 	server.on("/", handleRoot);
 	server.on("/data.json", handleData);
 	server.on("/setLocation", handleSetLocation);
 	server.onNotFound(handleNotFound); 
 	server.begin();
+
+	Serial.println("DATA");
 	dataserver.begin();
 }
 
@@ -216,6 +225,7 @@ void loop() {
 	delay(100);
 	counter++;
 
+	ArduinoOTA.handle();
 	MDNS.update();
 	server.handleClient();
 
