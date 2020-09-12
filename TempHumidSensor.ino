@@ -170,22 +170,31 @@ void handleSetLocation() {
 
 void setup() {
 
+	Serial.begin( 115200 );
+	Serial.println("\nStartup");
+
+	Serial.println("Storage Start");
 	EEPROM.begin( 512 );
 
+	Serial.println("Read Location");
 	readLocation();
 
-	Serial.begin( 115200 );
-	Serial.println("Startup");
+	Serial.println("Set SSID");
+	WiFi.softAP( "FIXME" );
 
 	Serial.print("ConfigAP SSID: ");
 	Serial.println( WiFi.softAPSSID() );
 
+	Serial.println("Start i2c");
 	Wire.begin();
 
+	Serial.println("Reset sensor");
 	sensorReset();
 
+	Serial.println("Add AP");	
 	wifi.addAP( SECRET_SSID, SECRET_PASSWORD );
 
+	Serial.println("Wait for WiFi");
 	while (wifi.run() != WL_CONNECTED) {
     	delay(250);
     	Serial.print('.');
@@ -194,6 +203,8 @@ void setup() {
   	Serial.println(WiFi.SSID());
   	Serial.print("IP address:\t");
   	Serial.println(WiFi.localIP());
+
+	configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 
 	ArduinoOTA.setPassword( SECRET_PASSWORD );
 
@@ -244,6 +255,8 @@ void loop() {
 	}
 
 	if ( counter == 20 ) {
+	  	time_t current = time(nullptr);
+		Serial.println(ctime(&current));
 		counter = 0;
 		sensorUpdate();
 	}
