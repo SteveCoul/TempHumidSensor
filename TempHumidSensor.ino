@@ -9,6 +9,7 @@
 #include <ArduinoOTA.h>
 
 #include <HumiditySensor.h>
+#include <log.h>
 
 #define I2C_ADDRESS	0x44
 
@@ -89,14 +90,7 @@ uint32_t compressValues( float t, float h ) {
 	unsigned int H = (unsigned int)( h * 256 );
 	T = T & 0xFFFF;
 	H = H & 0xFFFF;
-	Serial.print("  compress ");
-	Serial.print(t);
-	Serial.print(" and ");
-	Serial.print(h);
-	Serial.print(" via 0x");
-	Serial.print(T,HEX);
-	Serial.print(" and 0x");
-	Serial.println(H,HEX);
+	log( "  compress %f and %f via 0x%x and 0x%x", t, h, T, H );
 	return ( T << 16 ) | H;
 }
 
@@ -110,12 +104,8 @@ void decompressValues( uint32_t raw, float* pt, float* ph ) {
 void save_history( float temp, float humid ) {
 	time_t current = time(nullptr);
 
-	Serial.print(ctime(&current));
-	Serial.print(" saving history of ");
-	Serial.print(temp);
-	Serial.print(" degrees @ ");
-	Serial.print(humid);
-	Serial.println("% RH");
+	log( ctime(&current) );
+	log( "  saving history of %f degrees @ %f %% RH", temp, humid );
 	
 	history[ (history_ptr*2)+0 ] = (uint32_t)current;
 	history[ (history_ptr*2)+1 ] = compressValues( temp, humid );
@@ -168,16 +158,7 @@ void add_sample( float t, float h ) {
 	currentTemperature/=avg_count;
 	currentHumidity/=avg_count;
 
-	Serial.print("Currently ");
-	Serial.print(t);
-	Serial.print(" degrees, ");
-	Serial.print(h);
-	Serial.print(" %% R-humidity. Rolling average of ");
-	Serial.print(currentTemperature);
-	Serial.print(" degress, ");
-	Serial.print(currentHumidity);
-	Serial.print(" %% R-humidity");
-	Serial.println("");
+	log( "Currently %f degrees, %f %% R-humidity. Rolling average of %f degrees at %f RH", t,h, currentTemperature, currentHumidity );
 
 	added++;
 	if ( added == RECORD_GAP ) {
@@ -228,55 +209,48 @@ void handleData() {
 void setup() {
 
 	Serial.begin( 115200 );
-	Serial.println("\nStartup");
+	log("");
+	log("Starting");
 
-	Serial.print("Set SSID "); Serial.println( device_name() );
+	log("SSID/NAME is %s", device_name() );
 	WiFi.softAP( device_name() );
 
-	Serial.print("ConfigAP SSID: ");
-	Serial.println( WiFi.softAPSSID() );
-
-	Serial.println("Start i2c");
-	Wire.begin();
-
-	Serial.println("Reset sensor");
 	HumiditySensor::reset();
 
-	Serial.println("Add AP");	
+	log("Setting AP");
 	wifi.addAP( SECRET_SSID, SECRET_PASSWORD );
 
-	Serial.println("Wait for WiFi");
+	log("Wait for WiFi");
 	while (wifi.run() != WL_CONNECTED) {
     	delay(250);
-    	Serial.print('.');
 	}
-  	Serial.print("Connected to ");
-  	Serial.println(WiFi.SSID());
-  	Serial.print("IP address:\t");
-  	Serial.println(WiFi.localIP());
+	/* TODO show IP */
+	log("Connected");
 
+	log("Config NTP");
 	configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 
+	log("Config OTA");
 	ArduinoOTA.setPassword( SECRET_PASSWORD );
 
   	if (MDNS.begin(  WiFi.softAPSSID().c_str(), WiFi.localIP())) { 
-    	Serial.println("mDNS responder started");
+    	log("mDNS responder started");
 		MDNS.addService("http", "tcp", 80);
 		MDNS.addService("temphumidsensor", "tcp", 32768);
 	} else {
-    	Serial.println("Error setting up MDNS responder!");
+		log("Error setting up MDNS responder!");
 	}
 
-	Serial.println("OTA");
+	log("Start OTA");
 	ArduinoOTA.begin();
 
-	Serial.println("HTTP");
+	log("Start HTTP");
 	server.on("/", handleRoot);
 	server.on("/data.json", handleData);
 	server.onNotFound(handleNotFound); 
 	server.begin();
 
-	Serial.println("DATA");
+	log("Start Data service on :32768");
 	dataserver.begin();
 }
 

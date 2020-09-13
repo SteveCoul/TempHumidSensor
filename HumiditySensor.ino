@@ -1,4 +1,6 @@
 
+#include <Wire.h>
+
 #include <HumiditySensor.h>
 
 uint8_t HumiditySensor::crc8( uint8_t *datptr, uint8_t len ) {
@@ -25,6 +27,8 @@ void HumiditySensor::sensorHeat( bool on_or_off ) {
 }
 
 void HumiditySensor::reset() {
+	log("Reset/Prepare sensor");
+	Wire.begin();
 	i2cCmd( 0x30A2 );
 	delay(2);
 }
