@@ -1,0 +1,3 @@
+[submodule "ArduinoDockerBuildMachine"]
+	path = ArduinoDockerBuildMachine
+	url = git@github.com:/SteveCoul/ArduinoDockerBuildMachine
