@@ -34,8 +34,7 @@
 
 	 a 1k buffer could handle 128 samples ) */
 
-//#define HISTORY				2560 /* 128 = 20k = 40 hours */
-#define HISTORY 5
+#define HISTORY				2560 /* 128 = 20k = 40 hours */
 
 /* ********************************************************** *
  *
