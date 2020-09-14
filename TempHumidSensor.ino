@@ -224,8 +224,9 @@ void setup() {
 	while (wifi.run() != WL_CONNECTED) {
     	delay(250);
 	}
-	/* TODO show IP */
-	log("Connected");
+
+	uint32_t ip = htonl( WiFi.localIP() );
+	log("Connected %u.%u.%u.%u", (ip>>24)&255,(ip>>16)&255,(ip>>8)&255,ip&255);
 
 	log("Config NTP");
 	configTime(0, 0, "pool.ntp.org", "time.nist.gov");
@@ -265,9 +266,14 @@ void loop() {
 
 	WiFiClient c = dataserver.available();
 	if ( c ) {
+		c.print( "{ \"data\": [");
 		for ( int i = 0; i < history_count; i++ ) {
-			c.println( json_history_record( i ) );
+			c.print( json_history_record( i ) );
+			if ( i != ( history_count -1 ) ) {
+				c.print(",");
+			}
 		}
+		c.println("] }");
 		c.flush();
 		c.stop();
 	}
