@@ -104,6 +104,11 @@ void save_history( float temp, float humid ) {
 	time_t current = time(nullptr);
 
 	log( ctime(&current) );
+	if ( current < 10000 ) {
+		log( "ignoring data, ntp hasn't got us a clock yet" );
+		return;
+	}
+
 	log( "  saving history of %f degrees @ %f %% RH", temp, humid );
 	
 	history[ (history_ptr*2)+0 ] = (uint32_t)current;
