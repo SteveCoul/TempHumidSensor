@@ -63,7 +63,7 @@ const char* device_name() {
 	static char name[16+8+1] = { 0 };
 	if ( name[0] == '\0' ) {
 		(void)sprintf( 	name, 
-						"TempHumidSensor-%08X", device_id() );
+						"THS-%08X", device_id() );
 	}
 	return (const char*)name;
 }
