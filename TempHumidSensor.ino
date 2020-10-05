@@ -270,6 +270,17 @@ void loop() {
 
 	WiFiClient c = dataserver.available();
 	if ( c ) {
+		/* Sigh. I don't want http headers but I can't
+		   do CORS requests otherwise. 
+	
+		   I should implement a HTTP request for all data
+		   seperately */
+
+		c.print("HTTP/1.0 200 Okay\r\n");
+		c.print("Access-Control-Allow-Origin: *\r\n");
+		c.print("Content-type: text.json\r\n");
+		c.print("\r\n");
+
 		c.print( "{ \"data\": [");
 		for ( int i = 0; i < history_count; i++ ) {
 			c.print( json_history_record( i ) );
@@ -279,7 +290,7 @@ void loop() {
 		}
 		c.println("] }");
 		c.flush();
-		c.stop();
+//		c.stop();
 	}
 
 	if ( counter == ((SAMPLE_SPACING*1000)/POLL_DELAY) ) {
