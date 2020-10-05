@@ -19,22 +19,27 @@
 #define	POLL_DELAY			100
 
 /* How many seconds between reading sensor */
-#define SAMPLE_SPACING		2
+#define SAMPLE_SPACING		10	
 
 /* We do a rolling average of *this* many samples */
 #define AVERAGE_DEPTH		30
 
 /* How often (#samples added) before recording a record */
 /* Needs to be <= average depth really */
-#define	RECORD_GAP			3
+#define	RECORD_GAP			12
 
 /* History Depth 
    ( history is time ( 32bit ) and our two 16 bit values
 	 in 8.8 arithmatic. So it's 8 bytes per sample
-
 	 a 1k buffer could handle 128 samples ) */
 
-#define HISTORY				2560 /* 128 = 20k = 40 hours */
+#define HISTORY				2560 
+
+/*
+	2560 samples, we're adding one every 12 records which
+	are 10 second apart. So it's 30 samples per hour.
+
+	2560/30 = @ 85 hours or about 3.5 days */
 
 /* ********************************************************** *
  *
