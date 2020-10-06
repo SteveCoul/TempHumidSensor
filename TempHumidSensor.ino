@@ -14,6 +14,7 @@
 #define I2C_ADDRESS	0x44
 
 #include "secret.h"
+#include "app.html.h"
 
 /* Millisecond delay in main poll loop */
 #define	POLL_DELAY			100
@@ -183,7 +184,7 @@ void add_sample( float t, float h ) {
 char tmp[1024];
 
 void handleNotFound(){
-	server.send(404, "text/plain", "404: Not found");
+	server.send(404, "text/plain", "404: Not found - probably");
 }
 
 void handleRoot() {
@@ -197,6 +198,10 @@ void handleRoot() {
 	p+=sprintf(p,"</BODY>");
 	p+=sprintf(p,"</HTML>");
 	server.send(200,"text/html", tmp );
+}
+
+void handleApp() {
+	server.send(200,"text/html", (const char*)appdata );
 }
  
 void handleData() {
@@ -257,6 +262,7 @@ void setup() {
 	log("Start HTTP");
 	server.on("/", handleRoot);
 	server.on("/data.json", handleData);
+	server.on("/app.html", handleApp);
 	server.onNotFound(handleNotFound); 
 	server.begin();
 
