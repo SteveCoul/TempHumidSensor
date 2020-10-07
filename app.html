@@ -189,8 +189,37 @@
 			var w = this.YAXISWIDTH;
 			var h = this.ch - this.XAXISHEIGHT;
 			c.translate( this.cx, this.cy );
-			c.fillStyle = "blue";
-			c.fillRect( 0, 0, w, h );
+
+			/* Crappy but easy for now */
+			c.font = this.YAXIS_FONT;
+			c.fillStyle = this.YAXIS_COLOR;
+
+			console.log( this.miny + "->" + this.maxy );
+			c.textAlign="right";
+			c.fillText( (Math.round(this.maxy * 100) / 100).toFixed(2), w, fontAscent(c) );
+
+			c.textAlign="right";
+			c.fillText( (Math.round(this.miny * 100) / 100).toFixed(2), w, h-fontDescent(c) );
+
+			c.restore();
+		}
+
+		hourMarkers() {
+			var c = this.ctx;
+			c.save();
+			var time_window = this.maxx - this.minx;
+			var last_hour = -1;
+			for ( i = 0; i < this.cw; i++ ) {
+				var tm = ( i * time_window ) / this.cw;
+				tm = parseInt( tm ) + parseInt( this.minx );
+				var d = new Date( tm * 1000 );
+				var h = d.getHours();
+				if ( h != last_hour ) {
+					last_hour = h;
+					c.fillStyle = this.AXIS_COLOR;
+					c.fillRect( this.cx+i, this.cy, 1, this.ch );
+				}
+			}
 			c.restore();
 		}
 
@@ -244,6 +273,8 @@
 			this.cx += this.YAXISWIDTH;
 			this.cw -= this.YAXISWIDTH;
 			this.ch -= this.XAXISHEIGHT;
+
+			this.hourMarkers();
 
 			for ( var i = 0; i < this.data.length; i++ ) {
 				console.log("  data set " + i );
