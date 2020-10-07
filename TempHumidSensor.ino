@@ -292,7 +292,10 @@ void loop() {
 		c.print("Content-type: text.json\r\n");
 		c.print("\r\n");
 
-		c.print( "{ \"data\": [");
+		c.print( "{ \"name\": \"");
+		c.print(device_name());
+		c.println( "\",");
+		c.print("\"data\": [");
 		for ( int i = 0; i < history_count; i++ ) {
 			c.print( json_history_record( i ) );
 			if ( i != ( history_count -1 ) ) {
