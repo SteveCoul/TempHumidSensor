@@ -286,7 +286,8 @@
 	}
 
 
-	function incoming( label, json ) {
+	function incoming( json ) {
+		var label = json.name;
 		var y = new Array();
 		var x = new Array();
 
@@ -314,7 +315,7 @@
 	function onreadystatechange() {
 		if ( ( this.readyState == 4 ) && ( this.status == 200 ) ) {
 			console.log( this );
-			incoming( this.responseURL, JSON.parse( this.responseText ) );
+			incoming( JSON.parse( this.responseText ) );
 		}
 	}
 
@@ -342,7 +343,7 @@
 
 </SCRIPT>
 </HEAD>
-<BODY style="background-color:red;" onload="start();">
+<BODY style="background-color:black;" onload="start();">
 	<IMG ID="output" width=100% height=45%></IMG>
 	<DIV ID="key" style="background-color:black; width:100%;" ALIGN="right"></DIV>
 	<IMG ID="output2" width=100% height=45%></IMG>
