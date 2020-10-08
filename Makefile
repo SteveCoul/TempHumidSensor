@@ -2,6 +2,7 @@
 all:
 	echo "#define SECRET_SSID \"$(SSID)\"" > secret.h
 	echo "#define SECRET_PASSWORD \"$(PASSWORD)\"" >> secret.h
+	echo "#define SECRET_LOCATION \"$(LOCATION)\"" >> secret.h
 	echo "static const unsigned char appdata[] = { \\" > app.html.h
 	( cat app.html && echo "\0") | xxd -i >> app.html.h
 	echo "};" >> app.html.h

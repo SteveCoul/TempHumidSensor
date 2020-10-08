@@ -295,6 +295,9 @@ void loop() {
 		c.print( "{ \"name\": \"");
 		c.print(device_name());
 		c.println( "\",");
+		c.print( "  \"location\": \"");
+		c.print(SECRET_LOCATION);
+		c.println( "\",");
 		c.print("\"data\": [");
 		for ( int i = 0; i < history_count; i++ ) {
 			c.print( json_history_record( i ) );
